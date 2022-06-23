@@ -14,6 +14,6 @@ Take home assignment of Tuebora
 
 **One liner about the important classes for code review**
 1. TokenBucketImpl : Implementation of standard token bucket algorithm
-2. RateLimitedFunction : This is essentially a wrapper over the Function class. 
+2. RateLimitedFunction : This is essentially a wrapper over the Function interface. 
 3. RateLimiter : An interface providing functionalities of a generic rate limiter
 4. RateLimiterImplWithTokenBucket : An implementation of RateLimiter interface with a custom TokenBucket algorithm

@@ -37,15 +37,7 @@ public class TokenBucketImpl implements TokenBucket {
     }
 
     @Override
-    public long getDurationUntilNextRefill() {
-        if (refillStrategy != null) {
-            return refillStrategy.getDurationUntilNextRefill();
-        }
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean tryConsume() {
+    public synchronized boolean tryConsume() {
         assert refillStrategy != null;
         refill(refillStrategy.refill());
         if (size > 0) {

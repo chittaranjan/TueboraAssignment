@@ -7,6 +7,13 @@ import tokenBucket.TokenBucketImpl;
 public class RateLimiterImplWithTokenBucket implements RateLimiter {
     private TokenBucket tokenBucket;
 
+    /**
+     * RateLimiterImplWithTokenBucket constructor
+     * @param capacity capacity of the bucket
+     * @param initialTokens initial number of tokens in the bucket
+     * @param refillTokens no of tokens to be refilled
+     * @param window time window in seconds
+     */
     public RateLimiterImplWithTokenBucket(long capacity, long initialTokens, long refillTokens, long window) {
         this.tokenBucket = new TokenBucketImpl.Builder()
                 .withCapacity(capacity)

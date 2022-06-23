@@ -13,8 +13,6 @@ public interface TokenBucket {
      */
     long getNumberOfAvailableTokens();
 
-    long getDurationUntilNextRefill() throws UnsupportedOperationException;
-
     boolean tryConsume();
 
     void consume();
@@ -22,15 +20,13 @@ public interface TokenBucket {
     void refill(long tokens);
 
     /**
-     * Strategy for token refil
+     * Strategy for token refill
      */
-    static interface RefillStrategy {
+    interface RefillStrategy {
         /**
          * Returns the number of tokens to add to the bucket
          * @return
          */
         long refill();
-
-        long getDurationUntilNextRefill();
     }
 }

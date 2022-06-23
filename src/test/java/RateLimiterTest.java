@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 public class RateLimiterTest {
@@ -50,5 +52,24 @@ public class RateLimiterTest {
         }
         Thread.sleep(1000);
         System.out.println(rateLimited.apply(4));
+    }
+
+    @Test
+    public void testRateLimitedFunctionWithMultipleThreads() throws InterruptedException {
+        RateLimiter rateLimiter = new RateLimiterImplWithTokenBucket(4, 4, 1, 2);
+        Function<Integer, Integer> square = x -> x * x;
+        Function<Integer, Integer> rateLimited = rateLimiter.wrap(square);
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        for (int i=0; i<10; i++) {
+            executorService.execute(() -> {
+                try {
+                    IntStream.range(0, 5).parallel().forEach(
+                            x -> System.out.println(rateLimited.apply(4)));
+                } catch (IllegalStateException ise) {
+                    System.out.println(ise.getMessage());
+                }
+            });
+        }
+        executorService.shutdown();
     }
 }

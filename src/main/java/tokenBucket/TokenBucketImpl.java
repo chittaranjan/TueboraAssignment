@@ -1,5 +1,10 @@
 package tokenBucket;
 
+/**
+ * This is a custom implementation of Token bucket algorithm
+ * It supports consumption of one token at a time, can be extended easily for multi token consumption
+ * A RefillStrategy can be used to refill the bucket with tokens
+ */
 public class TokenBucketImpl implements TokenBucket {
     private RefillStrategy refillStrategy;
     private long capacity;
@@ -45,15 +50,6 @@ public class TokenBucketImpl implements TokenBucket {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void consume() {
-        while(true) {
-            if (tryConsume()) {
-                break;
-            }
-        }
     }
 
     @Override

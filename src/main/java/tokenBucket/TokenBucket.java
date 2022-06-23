@@ -13,10 +13,16 @@ public interface TokenBucket {
      */
     long getNumberOfAvailableTokens();
 
+    /**
+     * Tries to consume a token if available
+     * @return
+     */
     boolean tryConsume();
 
-    void consume();
-
+    /**
+     * Refills the bucket with tokens
+     * @param tokens
+     */
     void refill(long tokens);
 
     /**

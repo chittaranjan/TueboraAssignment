@@ -68,14 +68,14 @@ public class TokenBucketImplTest {
     @Test
     public void testConsumingTokenDecreasesNumTokens() {
         refillStrategy.addTokens(1);
-        tokenBucket.consume();
+        tokenBucket.tryConsume();
         assertEquals(0, tokenBucket.getNumberOfAvailableTokens());
     }
 
     @Test
     public void testConsumingMultipleTokensDecreasesNumTokens() {
         refillStrategy.addTokens(capacity);
-        tokenBucket.consume();
+        tokenBucket.tryConsume();
         assertEquals(capacity - 1, tokenBucket.getNumberOfAvailableTokens());
     }
 

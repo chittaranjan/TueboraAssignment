@@ -23,7 +23,7 @@ public class RateLimiterImplWithTokenBucket implements RateLimiter {
     }
 
     @Override
-    public boolean tryConsume() {
+    public boolean getExecutionPermit() {
         return tokenBucket.tryConsume();
     }
 
